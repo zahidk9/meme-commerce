@@ -4,5 +4,5 @@ from memecommerce import views
 app_name = 'memecommerce'
 
 urlpatterns = [
-	path('cow', views.cow, name='cow')
+	path('', views.cow, name='cow')
 ]
