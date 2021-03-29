@@ -5,4 +5,5 @@ from django.http import HttpResponse
 
 # Just a temporary view function for the homepage
 def cow(request):
-    return HttpResponse("cow go moo")
+    return render(request, 'memecommerce/cow.html')
+    # return HttpResponse("cow go moo")
