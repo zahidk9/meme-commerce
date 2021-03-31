@@ -6,7 +6,7 @@ from django.template.defaultfilters import slugify
 #post order. Post order is where the users memes are stored
 class Meme(models.Model):
     title = models.CharField(max_length=100, db_index=True) 
-    price = models.DecimalField(max_digits=6, decimal_places=2)
+    price = models.DecimalField(max_digits=6, decimal_places=2, null=True)
     image = models.ImageField(upload_to='meme_photo', blank=True)
 #slug allows users meme names to be converted to url's
     slug = models.SlugField(unique=True)
