@@ -1,12 +1,13 @@
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
-
+from django.template.defaultfilters import slugify
 #meme's split into three sections. Before purchase, in basket and 
 #post order. Post order is where the users memes are stored
 class Meme(models.Model):
-    title = models.CharField(max_length=100) 
-    price = models.FloatField()
+    title = models.CharField(max_length=100, db_index=True) 
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+    image = models.ImageField(upload_to='meme_photo', blank=True)
 #slug allows users meme names to be converted to url's
     slug = models.SlugField(unique=True)
     description = models.TextField(null=True, blank=True)
