@@ -2,6 +2,8 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
+
+
 #meme's are split into them being either ordered or listed by the user
 #with each of these splits inheriting from the main Meme class
 class Meme(models.Model):
