@@ -3,26 +3,26 @@ from django.contrib.auth.models import User
 from memecommerce.models import Meme, MemeOrder, MemeListing, UserProfile
 
 class MemeForm(forms.ModelForm):
-    title = forms.CharField(max_length=100, db_index=True, help_text="Please enter the name of your meme.")
+    title = forms.CharField(max_length=100, help_text="Please enter the name of your meme.")
     price = forms.DecimalField(required=True, help_text="Please enter a price for your meme.")
-    image = forms.ImageField(upload_to='memes/', blank=True, help_text="Upload your image here.")
-    slug = forms.CharField(widget=forms.HiddenInput())
-    description = forms.TextField(null=True, blank=True, help_text="Please enter a description of your meme (optional)")
+    image = forms.ImageField(required=True, help_text="Upload your image here.")
+    slug = forms.CharField(widget=forms.HiddenInput(), required=False)
+    description = forms.CharField(required=False, help_text="Please enter a description of your meme (optional)")
     
     class Meta:
         model = Meme 
-        fields = ('title', 'description', 'price')
+        fields = ('title', 'description', 'price',)
 
 
 class MemeOrderForm(forms.ModelForm):
     class Meta:
         model = MemeOrder 
-        fields = ('Ordered Meme')
+        fields = ('ordered_meme',)
 
 class MemeListingForm(forms.ModelForm):
     class Meta:
         model = MemeListing
-        fields = ('Listed Meme')
+        fields = ('listed_meme',)
 
 
 class UserForm(forms.ModelForm):
@@ -35,4 +35,4 @@ class UserForm(forms.ModelForm):
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ('purchased', 'listed',)
+        fields = ('purchased_memes', 'listed_memes',)
