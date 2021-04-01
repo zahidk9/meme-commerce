@@ -1,11 +1,43 @@
 <!DOCTYPE html>
-{% load staticfiles %}
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+
 <html>
-    <body>
-        <!--the following is for javascript (just leave it at the bottom)-->
-        <!--just playing around with it atm. Comes into use when html pages have been-->        
-        <!--created and functionality can be added to them with javascript (button clicks etc)-->        
-        <script src="{% static "js/jquery-3.3.1.min.js" %}" crossorigin="anonymous"></script>
-        <script src="{% static "js/memecommerce-query.js" %}" crossorigin="anonymous"></script>
-    </body>
+	<head lang="en"s>
+	  <title>Meme Commerce</title>
+	  <meta charset="utf-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	  
+	  <title>
+		Meme-C
+		{% block title_block %}		
+		{% endblock %}
+	  </title>  
+	  <div>
+		<nav class="navbar navbar-default">
+		  <div class="container-fluid">
+			<div class="navbar-header">
+			  <a class="navbar-brand" href="#">Meme-Commerce</a>
+			</div>
+			<ul class="nav navbar-nav">
+			  <li class="active"><a href="#">Home</a></li>
+			  <li><a href="#">About</a></li>
+			  <li><a href="#">Login</a></li>
+			</ul>
+		  </div>
+		</nav>		
+	</head>  
+	  
+	
+	<body>		
+		<div>
+			{% block body_block %}
+			{% endblock %}
+		</div>
+	</body>
+
 </html>

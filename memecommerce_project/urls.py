@@ -18,7 +18,7 @@ from django.urls import path, include
 from memecommerce import views
 
 urlpatterns = [
-    path('', views.cow, name='cow'),
+    path('', views.home, name='home'),
     path('memecommerce/', include('memecommerce.urls')),
     path('admin/', admin.site.urls)
 ]

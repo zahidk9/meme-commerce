@@ -1,0 +1,74 @@
+{% extends 'memecommerce/base.html' %}
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}"> 
+
+
+{% block title_block %}
+	Home
+{% endblock %}
+
+
+{% block body_block %}
+  
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+		<div class="thumbnail">
+		  <img src="{% static "images/img1.png" %}" alt="My image"/>
+		  <div class="caption">
+                <h4>Thumbnail label</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, soluta, eligendi doloribus sunt minus amet sit debitis repellat. Consectetur, culpa itaque odio similique suscipit</p>
+          </div>
+		</div>
+    </div>
+    <div class="col-sm-4">
+		<div class="thumbnail">
+		  <img src="{% static "images/img2.png" %}" alt="My image"/>
+		  <div class="caption">
+                <h4>Thumbnail label</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, soluta, eligendi doloribus sunt minus amet sit debitis repellat. Consectetur, culpa itaque odio similique suscipit</p>
+          </div>
+		</div>  
+    </div>
+    <div class="col-sm-4">
+		<div class="thumbnail">
+		  <img src="{% static "images/img6.png" %}" alt="My image"/>
+		  <div class="caption">
+                <h4>Thumbnail label</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, soluta, eligendi doloribus sunt minus amet sit debitis repellat. Consectetur, culpa itaque odio similique suscipit</p>
+          </div>
+		</div> 
+    </div>
+	<div class="col-sm-4">
+		<div class="thumbnail">
+		  <img src="{% static "images/img4.png" %}" alt="My image"/>
+		  <div class="caption">
+                <h4>Thumbnail label</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, soluta, eligendi doloribus sunt minus amet sit debitis repellat. Consectetur, culpa itaque odio similique suscipit</p>
+          </div>
+		</div> 
+    </div>
+	<div class="col-sm-4">
+		<div class="thumbnail">
+		  <img src="{% static "images/img5.png" %}" alt="My image"/>
+		  <div class="caption">
+                <h4>Thumbnail label</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, soluta, eligendi doloribus sunt minus amet sit debitis repellat. Consectetur, culpa itaque odio similique suscipit</p>
+          </div>
+		</div> 
+    </div>
+	<div class="col-sm-4">
+		<div class="thumbnail">
+		  <img src="{% static "images/img6.png" %}" alt="My image"/>
+		  <div class="caption">
+                <h4>Thumbnail label</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, soluta, eligendi doloribus sunt minus amet sit debitis repellat. Consectetur, culpa itaque odio similique suscipit</p>
+          </div>
+		</div>  
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
