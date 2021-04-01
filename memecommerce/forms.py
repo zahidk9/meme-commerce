@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User 
-from memecommerce.models import Meme, MemeOrder, UserProfile
+from memecommerce.models import Meme, MemeOrder, MemeListing, UserProfile
 
 class MemeForm(forms.ModelForm):
     title = forms.CharField(max_length=100, db_index=True, help_text="Please enter the name of your meme.")
@@ -18,6 +18,12 @@ class MemeOrderForm(forms.ModelForm):
     class Meta:
         model = MemeOrder 
         fields = ('Ordered Meme')
+
+class MemeListingForm(forms.ModelForm):
+    class Meta:
+        model = MemeListing
+        fields = ('Listed Meme')
+
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
