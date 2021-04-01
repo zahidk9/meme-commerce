@@ -1,7 +1,5 @@
 from django.contrib import admin
-from memecommerce.models import UserProfile
-# Register your models here.
-from .models import Meme, MemeBasket, MemeOrder
+from memecommerce.models import Meme, MemeBasket, MemeOrder, UserProfile
 
 admin.site.register(Meme)
 admin.site.register(MemeBasket)
