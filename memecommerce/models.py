@@ -2,8 +2,8 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
-#meme's split into three sections. Before purchase, in basket and 
-#post order. Post order is where the users memes are stored
+#meme's are split into them being either ordered or listed by the user
+#with each of these splits inheriting from the main Meme class
 class Meme(models.Model):
     title = models.CharField(max_length=100, db_index=True, unique=True) 
     price = models.DecimalField(max_digits=6, decimal_places=2, null=True)
@@ -12,6 +12,7 @@ class Meme(models.Model):
     slug = models.SlugField(unique=True)
     description = models.TextField(null=True, blank=True)
     purchased = models.BooleanField(default=False)
+    listed = models.BooleanField(default=False)
     
     def __str__(self):
         return self.title
@@ -24,24 +25,23 @@ class Meme(models.Model):
         purchased = True
         return
 
-#class MemeBasket(models.Model):
-    
-#    meme_ordered = models.BooleanField(default=False)
-#    meme = models.ForeignKey(Meme, on_delete=models.CASCADE)
-#    #quantity gives ability to keep track of number of memes user adds to basket
-#    quantity = models.IntegerField(default=1)
-    
-#    def __str__(self):
-#        return self.title
-
-#    def get_total_price(self):
-#        return self.quantity * self.price 
+    def meme_listing(self):
+        listed = True
+        return
 
 class MemeOrder(models.Model):
     ordered_meme = models.OneToOneField(Meme, null=True, on_delete=models.CASCADE)
     meme_ordered = models.BooleanField(default=False)
     
-    
+    def __str__(self):
+        return str(self.__class__)
+
+class MemeListing(models.Model):
+    listed_meme = models.OneToOneField(Meme, null=True, on_delete=models.CASCADE)
+    meme_listed = models.BooleanField(default=False)
+
+    def __str__(self):
+        return str(self.__class__)
         
 
 class UserProfile(models.Model):
@@ -53,4 +53,4 @@ class UserProfile(models.Model):
     def __str__(self):
        return self.user.username
 
-#164
+
