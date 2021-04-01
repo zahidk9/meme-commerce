@@ -1,18 +1,32 @@
 from django import forms
-from memecommerce.models import Meme, MemeBasket, MemeOrder, UserProfile
-#any help in this would be greatly appreciated as I honestly have no clue
-#what I am doing
+from django.contrib.auth.models import User 
+from memecommerce.models import Meme, MemeOrder, UserProfile
 
 class MemeForm(forms.ModelForm):
-    title = forms.CharField(max_length=100, help_text="Please enter the name of your meme.")
-    description = forms.TextField(null=True, blank=True, help_text="Please enter a description of your meme (optional)")
-    price = forms.FloatField(required=True, "Please enter a price for your meme")
+    title = forms.CharField(max_length=100, db_index=True, help_text="Please enter the name of your meme.")
+    price = forms.DecimalField(required=True, "Please enter a price for your meme")
+    image = forms.ImageField(upload_to= 'memes/', blank=True, help_text="Upload your image here.")
     slug = forms.CharField(widget=forms.HiddenInput(), required=False)
-
+    description = forms.TextField(null=True, blank=True, help_text="Please enter a description of your meme (optional)")
+    
     class Meta:
         model = Meme 
         fields = ('title', 'description', 'price')
 
-class MemeBasketForm(forms.ModelForm):
-    meme_ordered = forms.BooleanField(default=False)
-#how to do this with a foriegn key?
+
+class MemeOrderForm(forms.ModelForm):
+    class Meta:
+        model = MemeOrder 
+        fields = ('Ordered Meme')
+
+class UserForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput())
+
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password',)
+
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ('purchased', 'listed',)
