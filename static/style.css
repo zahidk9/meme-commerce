@@ -1,9 +1,45 @@
 body {
-    background-image: url("images/grey.png");
+    background-color: #E6E6E6 !important;
 }
 
 img {
     max-width: 100%;
     max-height: 100%;
 
+}
+
+.divider{
+	width:70%;
+	text-align: center;
+	height:2px;
+	border-width:0;
+	color:black;
+	background-color:black
+}	
+
+.navbar navbar-default{
+	padding-left:400px
+	padding-right:400px
+	background-color: #E6E6E6 !important;	
+}
+
+.nav-link{	
+	color: black !important;
+	padding: 1em 1.5em;
+	text-decoration: none;
+	font-family: OCR A Std, monospace;
+	text-transform: uppercase;
+}
+
+.nav-link:hover{
+	background-color:#9D9C9C !important;
+	transition-delay: 0.1s !important;
+}
+
+.navbar-brand{
+	color: black;
+	padding: 1em 1.5em;
+	text-decoration: none;	
+	font-family: OCR A Std, monospace;
+	text-transform: uppercase;
 }

@@ -1,11 +1,25 @@
-from django.contrib.auth import authenticate
 from django.shortcuts import render, redirect
-from memecommerce.models import Meme
-from django.http import HttpResponse
-from memecommerce.forms import UserForm, UserProfileForm
 from django.urls import reverse
-
+from django.views.generic import View, TemplateView 
+from memecommerce.models import Meme
+from django.http import HttpResponse, JsonResponse
+from memecommerce.forms import UserForm, UserProfileForm
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 # Create your views here.
+
+#class MainView(TemplateView):
+    #template_name = 'memecommerce/home.html'
+
+#class PostJsonListView(View):
+    #def get(self, *args, **kwargs):
+        #print(kwargs)
+        #upper = kwargs.get('num_posts')
+        #lower = upper - 6
+        #posts = list(Meme.objects.values()[lower:upper])
+        #posts_size = len(Meme.objects.all())
+        #max_size = True if upper >= posts_size else False
+        #return JsonResponse({'data': posts, 'max': max_size}, safe=False)
 
 def home(request):
     context_dict = {}
@@ -31,6 +45,7 @@ def viewMeme(request, meme_slug):
 
     return render(request, 'memecommerce/viewMeme.html', context=context_dict)
 
+@login_required
 def buyMeme(request, meme_slug):
     context_dict = {}
 
@@ -43,6 +58,7 @@ def buyMeme(request, meme_slug):
 
     return render(request, 'memecommerce/buyMeme.html', context=context_dict)
 
+@login_required
 def sellMeme(request):
     context_dict = {}
     response = render(request, 'memecommerce/sellMeme.html', context=context_dict)
@@ -50,62 +66,45 @@ def sellMeme(request):
 
 
 # account-related views
+@login_required
 def account(request):
     context_dict = {}
     response = render(request, 'memecommerce/account.html', context=context_dict)
     return response
-
+@login_required
 def editAccount(request):
     context_dict = {}
     response = render(request, 'memecommerce/editAccount.html', context=context_dict)
     return response
-
+@login_required
 def myListings(request):
     context_dict = {}
     response = render(request, 'memecommerce/myListings.html', context=context_dict)
     return response
-
+@login_required
 def myMemes(request):
     context_dict = {}
     response = render(request, 'memecommerce/myMemes.html', context=context_dict)
     return response
 
 # authentication-related views
-def login(request):
-    # If the request is a HTTP POST, try to pull out the relevant information.
+def user_login(request):
     if request.method == 'POST':
-        # Gather the username and password provided by the user.
-        # This information is obtained from the login form.
-        # We use request.POST.get('<variable>') as opposed
-        # to request.POST['<variable>'], because the
-        # request.POST.get('<variable>') returns None if the
-        # value does not exist, while request.POST['<variable>']
-        # will raise a KeyError exception.
         username = request.POST.get('username')
         password = request.POST.get('password')
 
         user = authenticate(username=username, password=password)
 
         if user:
-            # Is the account active? It could have been disabled.
             if user.is_active:
-                # If the account is valid and active, we can log the user in.
-                # We'll send the user back to the homepage.
                 login(request, user)
                 return redirect(reverse('memecommerce:home'))
             else:
-                # An inactive account was used - no logging in!
-                return HttpResponse("Your Meme-Commerce account is disabled.")
+                return HttpResponse("Your memecommerce account has been disabled.")
         else:
-            # Bad login details were provided. So we can't log the user in.
             print(f"Invalid login details: {username}, {password}")
             return HttpResponse("Invalid login details supplied.")
-
-    # The request is not a HTTP POST, so display the login form.
-    # This scenario would most likely be a HTTP GET.
     else:
-        # No context variables to pass to the template system, hence the
-        # blank dictionary object...
         return render(request, 'memecommerce/login.html')
 
 def register(request):
@@ -132,3 +131,8 @@ def register(request):
         profile_form = UserProfileForm() 
     context_dict = {'user_form': user_form, 'profile_form': profile_form, 'registered': registered}
     return render(request, 'memecommerce/register.html', context=context_dict)
+
+@login_required
+def user_logout(request):
+    logout(request)
+    return redirect(reverse('memecommerce:home'))
