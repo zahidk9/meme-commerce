@@ -8,38 +8,33 @@ img {
 
 }
 
-.divider{
-	width:70%;
-	text-align: center;
-	height:2px;
-	border-width:0;
-	color:black;
-	background-color:black
-}	
-
-.navbar navbar-default{
-	padding-left:400px
-	padding-right:400px
-	background-color: #E6E6E6 !important;	
+.container-fluid{
+	background-color: white !important;	
 }
 
 .nav-link{	
-	color: black !important;
+	color: #000066 !important;
 	padding: 1em 1.5em;
 	text-decoration: none;
-	font-family: OCR A Std, monospace;
+	font-family: 'Nunito', sans-serif;
 	text-transform: uppercase;
 }
 
 .nav-link:hover{
-	background-color:#9D9C9C !important;
+	color: #1aa3ff !important;
 	transition-delay: 0.1s !important;
 }
 
 .navbar-brand{
-	color: black;
+	color: #000066 !important;
 	padding: 1em 1.5em;
 	text-decoration: none;	
-	font-family: OCR A Std, monospace;
+	font-family: 'Nunito', sans-serif;
 	text-transform: uppercase;
+}
+
+.thumbnail{
+	background-color: #E6E6E6 !important;
+	border: none;
+
 }
