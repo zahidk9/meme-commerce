@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from memecommerce.models import Meme
 from django.http import HttpResponse
 from memecommerce.forms import UserForm, UserProfileForm
-
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def home(request):
@@ -29,6 +30,7 @@ def viewMeme(request, meme_slug):
 
     return render(request, 'memecommerce/viewMeme.html', context=context_dict)
 
+@login_required
 def buyMeme(request, meme_slug):
     context_dict = {}
 
@@ -41,6 +43,7 @@ def buyMeme(request, meme_slug):
 
     return render(request, 'memecommerce/buyMeme.html', context=context_dict)
 
+@login_required
 def sellMeme(request):
     context_dict = {}
     response = render(request, 'memecommerce/sellMeme.html', context=context_dict)
@@ -48,21 +51,22 @@ def sellMeme(request):
 
 
 # account-related views
+@login_required
 def account(request):
     context_dict = {}
     response = render(request, 'memecommerce/account.html', context=context_dict)
     return response
-
+@login_required
 def editAccount(request):
     context_dict = {}
     response = render(request, 'memecommerce/editAccount.html', context=context_dict)
     return response
-
+@login_required
 def myListings(request):
     context_dict = {}
     response = render(request, 'memecommerce/myListings.html', context=context_dict)
     return response
-
+@login_required
 def myMemes(request):
     context_dict = {}
     response = render(request, 'memecommerce/myMemes.html', context=context_dict)
@@ -70,9 +74,23 @@ def myMemes(request):
 
 # authentication-related views
 def login(request):
-    context_dict = {}
-    response = render(request, 'memecommerce/login.html', context=context_dict)
-    return response
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(username=username, password=password)
+
+        if user:
+            if user.is_active:
+                login(request, user)
+                return redirect(reverse('memecommerce:home'))
+            else:
+                return HttpResponse("Your memecommerce account has been disabled.")
+        else:
+            print(f"Invalid login details: {username}, {password}")
+            return HttpResponse("Invalid login details supplied.")
+    else:
+        return render(request, 'memecommerce/login.html')
 
 def register(request):
     registered = False
@@ -98,3 +116,8 @@ def register(request):
         profile_form = UserProfileForm() 
     context_dict = {'user_form': user_form, 'profile_form': profile_form, 'registered': registered}
     return render(request, 'memecommerce/register.html', context=context_dict)
+
+@login_requried
+def user_logout(request):
+    logout(request)
+    return redirect(reverse('memecommerce:home'))
