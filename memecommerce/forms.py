@@ -27,12 +27,16 @@ class MemeListingForm(forms.ModelForm):
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
+    email = forms.CharField(widget=forms.EmailInput())
 
     class Meta:
         model = User
         fields = ('username', 'email', 'password',)
 
 class UserProfileForm(forms.ModelForm):
+    purchased_memes = forms.CharField(widget=forms.HiddenInput())
+    listed_memes = forms.CharField(widget=forms.HiddenInput())
+
     class Meta:
         model = UserProfile
         fields = ('purchased_memes', 'listed_memes',)
