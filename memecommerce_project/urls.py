@@ -22,3 +22,6 @@ urlpatterns = [
     path('memecommerce/', include('memecommerce.urls')),
     path('admin/', admin.site.urls)
 ]
+#from memecommerce.views import MainView, PostJsonListView
+	#path('', MainView.as_view(), name='main-view'),
+    #path('posts-json/<int:num_posts>/', PostJsonListView.as_view(), name='posts-json-view'),
