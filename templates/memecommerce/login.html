@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block body_block %}
-<h1>Login to MemeCommerce</h1>
+<!-- <h1>Login to MemeCommerce</h1>
 <form id="login_form" method="post" action="{% url 'memecommerce:login' %}">
 	{% csrf_token %}
 	Username: <input type="text" name="username" value="" size="50" />
@@ -14,5 +14,34 @@
 	Password: <input type="password" name="password" value="" size="50" />
 	<br />
 	<input type="submit" value="submit" />
-</form>
+</form> -->
+
+
+
+<div id="login">
+        <div class="container">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6">
+                    <div id="login-box" class="col-md-12">
+                        <form id="login-form" class="form" action="" method="post" action="{% url 'memecommerce:login' %}">
+						{% csrf_token %}
+                            <h3 class="text-center text-info">Login to MemeCommerce</h3>
+							<div class = "loginboxes">
+								<div class="form-group">
+									<input placeholder="Username" type="text" name="username" id="username" class="form-control">
+								</div>
+								<div class="form-group">
+									<input placeholder="Password" type="text" name="password" id="password" class="form-control">
+								</div>
+								<div class="form-group">
+									<input style="margin-left:200px" type="submit" name="submit" class="button" value="Login">
+								</div>
+								<div class="reglink">New? <a href="{% url 'memecommerce:register' %}" class="text-info">Register here</a></div>
+							</div>	
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
