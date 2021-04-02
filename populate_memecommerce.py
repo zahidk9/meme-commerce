@@ -3,7 +3,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'memecommerce_project.settings')
 
 import django
 django.setup()
-from memecommerce.models import Meme, MemeOrder, MemeListing, UserProfile
+from memecommerce.models import Meme, UserProfile
 
 def populate():
     memes = [
@@ -26,22 +26,25 @@ def populate():
     {'title': 'MJ takes it personally',
         'price': 6.23,
         'description': 'He really do be taking it personally tho.',
-        'image':'media/memes/mj_takes_it_personally.jpeg'}]
+        'image': 'media/memes/mj_takes_it_personally.jpeg'}]
 
     for meme in memes:
         for k, v in meme.items():
-            m = add_meme(title=meme['title'], price=meme['price'], description=meme['description'], image=meme['image'])
+            add_meme(title=meme['title'], price=meme['price'], description=meme['description'], image=meme['image'])
     for m in Meme.objects.all():
         print(f'- {m}')
 
-def add_meme(title, price, description, image):
-    m = Meme.objects.get_or_create(title=title)[0]
-    m.price=price
-    m.description=description
-    m.image=image
+def add_meme(title, price, image, description):
+    # uuid gets created automatically
+    # author temporarily not required
+    m = Meme()
+    m.title = title
+    m.price = price
+    m.image = image
+    m.description = description
     m.save()
-    return m 
+    return m
 
 if __name__ == '__main__':
-    print('Starting Memecommerce population script...')
+    print('Starting Meme-Commerce population script...')
     populate()
