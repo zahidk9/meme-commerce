@@ -1,11 +1,25 @@
 from django.shortcuts import render, redirect
-from django.urls import reverse 
+from django.urls import reverse
+from django.views.generic import View, TemplateView 
 from memecommerce.models import Meme
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from memecommerce.forms import UserForm, UserProfileForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 # Create your views here.
+
+#class MainView(TemplateView):
+    #template_name = 'memecommerce/home.html'
+
+#class PostJsonListView(View):
+    #def get(self, *args, **kwargs):
+        #print(kwargs)
+        #upper = kwargs.get('num_posts')
+        #lower = upper - 6
+        #posts = list(Meme.objects.values()[lower:upper])
+        #posts_size = len(Meme.objects.all())
+        #max_size = True if upper >= posts_size else False
+        #return JsonResponse({'data': posts, 'max': max_size}, safe=False)
 
 def home(request):
     context_dict = {}
