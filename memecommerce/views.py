@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse 
 from memecommerce.models import Meme
 from django.http import HttpResponse
 from memecommerce.forms import UserForm, UserProfileForm
@@ -73,7 +74,7 @@ def myMemes(request):
     return response
 
 # authentication-related views
-def login(request):
+def user_login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -117,7 +118,7 @@ def register(request):
     context_dict = {'user_form': user_form, 'profile_form': profile_form, 'registered': registered}
     return render(request, 'memecommerce/register.html', context=context_dict)
 
-@login_requried
+@login_required
 def user_logout(request):
     logout(request)
     return redirect(reverse('memecommerce:home'))
