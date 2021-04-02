@@ -36,5 +36,19 @@ img {
 .thumbnail{
 	background-color: #E6E6E6 !important;
 	border: none;
-
 }
+
+.aboutbox{
+  background-color: #E6E6E6 !important;
+  width: 550px;
+  border: 2px solid black;
+  padding: 20px;
+  margin: 20px;
+  text-align: left;
+  border-radius: 10px;
+}
+
+.abouttitle{
+	padding-left: 20px;
+}
+
