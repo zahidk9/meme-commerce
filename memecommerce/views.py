@@ -46,11 +46,11 @@ def viewMeme(request, meme_slug):
     return render(request, 'memecommerce/viewMeme.html', context=context_dict)
 
 @login_required
-def buyMeme(request, meme_slug):
+def buyMeme(request, meme_id):
     context_dict = {}
 
     try:
-        meme = Meme.objects.get(slug=meme_slug)
+        meme = Meme.objects.get(meme_id=meme_id)
         context_dict[meme] = meme
 
     except Meme.DoesNotExist:
@@ -64,7 +64,8 @@ def sellMeme(request):
         meme_form = MemeForm(request.POST, request.FILES)
 
         if meme_form.is_valid():
-            meme = meme_form.save()
+            meme_form.save()
+            return redirect(reverse('memecommerce:home'))
         else:
             print(meme_form.errors)
     else:

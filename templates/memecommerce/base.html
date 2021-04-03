@@ -30,7 +30,11 @@
 				<ul class="nav navbar-nav navbar-right">
 					<li class="nav-item"><a class="nav-link" href="{% url 'memecommerce:home' %}">Home</a></li>
 					<li class="nav-item"><a class="nav-link" href="{% url 'memecommerce:about' %}">About</a></li>
-					<li class="nav-item"><a class="nav-link" href="{% url 'memecommerce:login' %}">Login</a></li>
+					{% if user.is_authenticated %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'memecommerce:logout' %}">Log Out</a></li>
+                    {% else %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'memecommerce:login' %}">Login</a></li>
+                    {% endif %}
 				</ul>
 			</div>
 		</nav>		
