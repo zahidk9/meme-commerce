@@ -28,15 +28,17 @@
                             <h3 class="text-center text-info">Login to MemeCommerce</h3>
 							<div class = "loginboxes">
 								<div class="form-group">
-									<input placeholder="Username" type="text" name="username" id="username" class="form-control">
+									<label id="label">Username</label>
+									<input type="text" name="username" id="username" class="form-control">
 								</div>
 								<div class="form-group">
-									<input placeholder="Password" type="password" name="password" id="password" class="form-control">
+									<label id="label">Password</label>
+									<input type="password" name="password" id="password" class="form-control">
 								</div>
-								<div class="form-group">
-									<input style="margin-left:200px" type="submit" name="submit" class="button" value="Login">
+								<div class="form-group center">
+									<input type="submit" name="submit" class="button" value="Login">
+									New? <a href="{% url 'memecommerce:register' %}" class="text-info">Register here</a>
 								</div>
-								<div class="reglink">New? <a href="{% url 'memecommerce:register' %}" class="text-info">Register here</a></div>
 							</div>	
                         </form>
                     </div>

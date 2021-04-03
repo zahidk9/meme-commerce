@@ -1,35 +1,42 @@
 {% extends "memecommerce/base.html" %}
 {% load static %}
+{% load myfilter %}
 
 {% block title_block %}
 	Register
 {% endblock %}
 
-{% block body_block %}
-<h1>Register for Meme-Commerce</h1>
-{% if registered %}
-
-	<a href="{% url 'memecommerce:home' %}">Return to homepage.</a><br/>
-{% else %}
-	<form id="user_form" method="post" action="{% url 'memecommerce:register' %}" enctype="multipart/form-data">
-	{% csrf_token %}
-	<h3 class="text-center text-info">Register to MemeCommerce</h3>
-	<div class="container">
-        <div id="login-row" class="row justify-content-center align-items-center">
-            <div id="login-column" class="col-md-6">
-                <div id="login-box" class="col-md-12">
-					<div class = "loginboxes">
-						<!-- Display each form -->
-						{{ user_form.as_p }}
-						{{ profile_form.as_p }}
-						<div class="form-group">
-							<input style="margin-left:200px" type="submit" name="submit" class="button" value="Register">
-						</div>
+{% block body_block %}	
+	<div id="register">
+		<div class="container">
+			<div id="login-row" class="row justify-content-center align-items-center">
+				<div id="login-column" class="col-md-6">
+					<div id="login-box" class="col-md-12">
+						<form id="user_form" method="post" action="{% url 'memecommerce:register' %}" enctype="multipart/form-data">
+						{% csrf_token %}
+							<h3 class="text-center text-info">Register to MemeCommerce</h3>
+							<div class = "loginboxes">
+								<div class="fieldWrapper">
+									<label id="label">Username</label>
+									<div id="subject">{{ user_form.username|addclass:'form-control' }}</div>
+									<label id="label">Email</label>
+									<div id="email">{{ user_form.email|addclass:'form-control' }}</div>
+									<label id="label">Password</label>
+									<div id="message">{{ user_form.password|addclass:'form-control' }}</div>
+								</div>
+								{{ profile_form.as_p }}
+								<div class="form-group regcenter">
+									<input type="submit" name="submit" class="button" value="Register">
+									Have an account? <a href="{% url 'memecommerce:register' %}" class="text-info">Log In</a>
+								</div>
+							</div>	
+						</form>	
 					</div>	
 				</div>	
 			</div>	
-		</div>	
-	</div>
-</form>
-{% endif %}
+		</div>
+	</div>	
 {% endblock %}
+
+
+

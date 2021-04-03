@@ -1,11 +1,12 @@
 body {
     background-color: #E6E6E6 !important;
+	font-family: 'Nunito', sans-serif !important;
+	color: #317395 !important;
 }
 
 img {
     max-width: 100%;
     max-height: 100%;
-
 }
 
 .container-fluid{
@@ -60,6 +61,10 @@ img {
   border: 1px solid #9C9C9C;
   background-color: white;
   border-radius: 10px;
+  width: 100%;
+  height: 50%;
+  min-width: 500px;
+  min-height:350px
 }
 #login .container #login-row #login-column #login-box #login-form {
   padding: 20px;
@@ -89,7 +94,50 @@ img {
 }
 
 .reglink{
-	margin-left:190px
+	text-align:center;
 }
 
+.center{
+	margin: 0;
+	position: absolute;
+	top: 80%;
+	left: 50%;
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+
+.regcenter{
+	margin: 0;
+	position: absolute;
+	top: 85%;
+	left: 50%;
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+
+#register .container #login-row #login-column #login-box {
+  margin-top: 120px;
+  margin-left: 300px;
+  max-width: 600px;
+  height: 320px;
+  border: 1px solid #9C9C9C;
+  background-color: white;
+  border-radius: 10px;
+  width: 100%;
+  height: 50%;
+  min-width: 500px;
+  min-height:350px;
+}
+#register .container #login-row #login-column #login-box #login-form {
+  padding: 20px;
+}
+#register .container #login-row #login-column #login-box #login-form #register-link {
+  margin-top: -85px;
+}
+
+#label{
+	color: #317395 !important;
+	font-size: 14px !important;
+	justify-content:left;
+}
 
