@@ -12,14 +12,24 @@
 	<a href="{% url 'memecommerce:home' %}">Return to homepage.</a><br/>
 {% else %}
 	<form id="user_form" method="post" action="{% url 'memecommerce:register' %}" enctype="multipart/form-data">
-
 	{% csrf_token %}
-
-	<!-- Display each form -->
-	{{ user_form.as_p }}
-	{{ profile_form.as_p }}
-
-	<input type="submit" name="submit" value="Register" />
+	<h3 class="text-center text-info">Register to MemeCommerce</h3>
+	<div class="container">
+        <div id="login-row" class="row justify-content-center align-items-center">
+            <div id="login-column" class="col-md-6">
+                <div id="login-box" class="col-md-12">
+					<div class = "loginboxes">
+						<!-- Display each form -->
+						{{ user_form.as_p }}
+						{{ profile_form.as_p }}
+						<div class="form-group">
+							<input style="margin-left:200px" type="submit" name="submit" class="button" value="Register">
+						</div>
+					</div>	
+				</div>	
+			</div>	
+		</div>	
+	</div>
 </form>
 {% endif %}
 {% endblock %}
