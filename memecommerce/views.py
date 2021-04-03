@@ -22,7 +22,11 @@ from django.contrib.auth.decorators import login_required
         #return JsonResponse({'data': posts, 'max': max_size}, safe=False)
 
 def home(request):
+    meme_list = Meme.objects.all()[:9]
+
     context_dict = {}
+    context_dict['meme_list'] = meme_list
+
     response = render(request, 'memecommerce/home.html', context=context_dict)
     return response
 
@@ -55,13 +59,16 @@ def buyMeme(request, meme_id):
     try:
         meme = Meme.objects.get(meme_id=meme_id)
         context_dict[meme] = meme
+
+        if request.method == 'POST':
+            user = request.user
+            userprofile = UserProfile.objects.get(user=user)
+            userprofile.purchased_memes.add()
+            redirect(reverse('memecommerce:home'))
+
     except Meme.DoesNotExist:
         context_dict[meme] = None
         return redirect(reverse('memecommerce:404'))
-    if request.method == 'POST':
-        user = request.user
-        userprofile = UserProfile.objects.get(user=user)
-        userprofile.purchased_memes.add()
 
     return render(request, 'memecommerce/buyMeme.html', context=context_dict)
 

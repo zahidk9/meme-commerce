@@ -6,7 +6,6 @@
 {% endblock %}
 
 {% block body_block %}
-{% if user.is_authenticated %}
     <form id="meme_form" method="post" action="{% url 'memecommerce:sellMeme' %}" enctype="multipart/form-data">
 	{% csrf_token %}
 	<h3 class="text-center text-info">List a Meme</h3>
@@ -27,7 +26,4 @@
 		</div>
 	</div>
 </form>
-{% else %}
-	<a href="{% url 'memecommerce:home' %}">Return to homepage.</a><br/>
-{% endif %}
 {% endblock %}
