@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views.generic import View, TemplateView 
-from memecommerce.models import Meme
+from memecommerce.models import Meme, UserProfile
 from django.http import HttpResponse, JsonResponse
 from memecommerce.forms import UserForm, UserProfileForm, MemeForm
 from django.contrib.auth import authenticate, login, logout
@@ -31,22 +31,12 @@ def about(request):
     response = render(request, 'memecommerce/about.html', context=context_dict)
     return response
 
+def missing(request):
+    return render(request, 'memecommerce/404.html')
+
 
 # meme-related views
-def viewMeme(request, meme_slug):
-    context_dict = {}
-
-    try:
-        meme = Meme.objects.get(slug=meme_slug)
-        context_dict[meme] = meme
-
-    except Meme.DoesNotExist:
-        context_dict[meme] = None
-
-    return render(request, 'memecommerce/viewMeme.html', context=context_dict)
-
-@login_required
-def buyMeme(request, meme_id):
+def viewMeme(request, meme_id):
     context_dict = {}
 
     try:
@@ -55,6 +45,23 @@ def buyMeme(request, meme_id):
 
     except Meme.DoesNotExist:
         context_dict[meme] = None
+        return redirect(reverse('memecommerce:404'))
+
+    return render(request, 'memecommerce/viewMeme.html', context=context_dict)
+
+@login_required
+def buyMeme(request, meme_id):
+    context_dict = {}
+    try:
+        meme = Meme.objects.get(meme_id=meme_id)
+        context_dict[meme] = meme
+    except Meme.DoesNotExist:
+        context_dict[meme] = None
+        return redirect(reverse('memecommerce:404'))
+    if request.method == 'POST':
+        user = request.user
+        userprofile = UserProfile.objects.get(user=user)
+        userprofile.purchased_memes.add()
 
     return render(request, 'memecommerce/buyMeme.html', context=context_dict)
 
@@ -133,6 +140,7 @@ def register(request):
 
             profile.save()
             registered = True
+            return redirect(reverse('memecommerce:login'))
         else:
             print(user_form.errors, profile_form.errors)
     else:

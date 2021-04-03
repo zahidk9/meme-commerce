@@ -6,9 +6,10 @@ app_name = 'memecommerce'
 urlpatterns = [
 	path('', views.home, name='home'),
 	path('about/', views.about, name='about'),
+	path('404/', views.missing, name='404'),
 
-	path('viewmeme/<slug:meme_slug>/', views.viewMeme, name='viewMeme'),
-	path('buymeme/<slug:meme_slug>/', views.buyMeme, name='buyMeme'),
+	path('viewmeme/<uuid:meme_id>/', views.viewMeme, name='viewMeme'),
+	path('buymeme/<uuid:meme_id>/', views.buyMeme, name='buyMeme'),
 	path('sellmeme/', views.sellMeme, name='sellMeme'),
 
 	path('account/', views.account, name='account'),
