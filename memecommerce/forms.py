@@ -3,6 +3,11 @@ from django.contrib.auth.models import User
 from memecommerce.models import Meme, UserProfile
 
 class MemeForm(forms.ModelForm):
+    title = forms.CharField(max_length=32)
+    price = forms.DecimalField(decimal_places=2, min_value=0, max_digits=6)
+    image = forms.ImageField()
+    description = forms.CharField(widget=forms.TextInput(), required=False)
+
     class Meta:
         model = Meme 
         fields = ('title', 'price', 'image', 'description')

@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.views.generic import View, TemplateView 
 from memecommerce.models import Meme
 from django.http import HttpResponse, JsonResponse
-from memecommerce.forms import UserForm, UserProfileForm
+from memecommerce.forms import UserForm, UserProfileForm, MemeForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 # Create your views here.
@@ -60,9 +60,17 @@ def buyMeme(request, meme_slug):
 
 @login_required
 def sellMeme(request):
-    context_dict = {}
-    response = render(request, 'memecommerce/sellMeme.html', context=context_dict)
-    return response
+    if request.method == 'POST':
+        meme_form = MemeForm(request.POST, request.FILES)
+
+        if meme_form.is_valid():
+            meme = meme_form.save()
+        else:
+            print(meme_form.errors)
+    else:
+        meme_form = MemeForm()
+    context_dict = {'meme_form': meme_form}
+    return render(request, 'memecommerce/sellMeme.html', context=context_dict)
 
 
 # account-related views
