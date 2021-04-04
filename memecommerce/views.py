@@ -23,8 +23,6 @@ from django.contrib.auth.decorators import login_required
 
 def home(request):
     all_memes = Meme.objects.all()
-    for meme in all_memes:
-        print(meme, meme.purchased)
     meme_list = list(filter(lambda meme: meme.purchased == False, all_memes))[:9]
 
     context_dict = {}
