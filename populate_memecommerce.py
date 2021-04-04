@@ -1,9 +1,11 @@
-import os 
+import os
+
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'memecommerce_project.settings')
 
 import django
 django.setup()
-from memecommerce.models import Meme, UserProfile
+from django.contrib.auth.models import User
+from memecommerce.models import Meme
 def populate():
     memes = [
         {
@@ -134,12 +136,16 @@ def populate():
         }
     ]
 
+    author = User()
+    author.username, author.email, author.password = "John Author", "john@email.com", "password"
+    author.save()
+
     for meme in memes:
-        add_meme(title=meme['title'], price=meme['price'], description=meme['description'], image=meme['image'], purchased=meme['purchased'])
+        add_meme(title=meme['title'], price=meme['price'], description=meme['description'], image=meme['image'], purchased=meme['purchased'], author=author)
     for m in Meme.objects.all():
         print(f'- {m}')
 
-def add_meme(title, price, image, description, purchased):
+def add_meme(title, price, image, description, purchased, author):
     # uuid gets created automatically
     # author temporarily not required
     m = Meme()
@@ -148,6 +154,7 @@ def add_meme(title, price, image, description, purchased):
     m.image = image
     m.description = description
     m.purchased = purchased
+    m.author = author
     m.save()
     return m
 

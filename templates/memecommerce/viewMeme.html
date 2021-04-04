@@ -1,28 +1,14 @@
 {% extends 'memecommerce/base.html' %}
 {% load static %}
 
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+
 {% block title_block %}
     View Meme
 {% endblock %}
 
 
 {% block body_block %}
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
-        .imgbox {
-            display: grid;
-            height: 100%;
-        }
-        .center-fit {
-            max-width: 100%;
-            max-height: 80vh;
-            margin: auto;
-        }
-    </style>
-
     <div class="imgbox">
     {% csrf_token %}
     <img  class="center-fit" src="/{{ meme.image.name }}" alt="{{ meme.title }}">

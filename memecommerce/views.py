@@ -83,7 +83,9 @@ def sellMeme(request):
         meme_form = MemeForm(request.POST, request.FILES)
 
         if meme_form.is_valid():
-            meme_form.save()
+            meme = meme_form.save()
+            meme.author = request.user
+            meme.save()
             return redirect(reverse('memecommerce:home'))
         else:
             print(meme_form.errors)
