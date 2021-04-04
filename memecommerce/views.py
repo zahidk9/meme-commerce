@@ -22,7 +22,8 @@ from django.contrib.auth.decorators import login_required
         #return JsonResponse({'data': posts, 'max': max_size}, safe=False)
 
 def home(request):
-    meme_list = Meme.objects.all()[:9]
+    all_memes = Meme.objects.all()
+    meme_list = list(filter(lambda meme: meme.purchased == False, all_memes))[:9]
 
     context_dict = {}
     context_dict['meme_list'] = meme_list
