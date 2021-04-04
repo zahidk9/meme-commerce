@@ -1,29 +1,42 @@
 {% extends "memecommerce/base.html" %}
 {% load static %}
+{% load myfilter %}
 
 {% block title_block %}
 	Sell Meme
 {% endblock %}
 
 {% block body_block %}
-    <form id="meme_form" method="post" action="{% url 'memecommerce:sellMeme' %}" enctype="multipart/form-data">
-	{% csrf_token %}
-	<h3 class="text-center text-info">List a Meme</h3>
-        this page does not redirect on form submission
-	<div class="container">
-        <div id="login-row" class="row justify-content-center align-items-center">
-            <div id="login-column" class="col-md-6">
-                <div id="login-box" class="col-md-12">
-					<div class = "loginboxes">
-						<!-- Display each form -->
-						{{ meme_form.as_p }}
-						<div class="form-group">
-							<input style="margin-left:200px" type="submit" name="submit" class="button" value="List">
-						</div>
-					</div>
-				</div>
-			</div>
+	<div id="sellMeme">
+		<div class="container">
+			<div id="login-row" class="row justify-content-center align-items-center">
+				<div id="login-column" class="col-md-6">
+					<div id="login-box" class="col-md-12">
+						<form id="meme_form" method="post" action="{% url 'memecommerce:sellMeme' %}" enctype="multipart/form-data">
+							<h3 class="text-center text-info">List your Meme</h3>
+							<div class = "loginboxes">
+								<div class="fieldWrapper">
+									<label id="label">Title</label>
+									<div id="subject">{{ meme_form.title|addclass:'form-control' }}</div>
+									<label id="label">Price</label>
+									<div id="email">{{ meme_form.price|addclass:'form-control' }}</div>
+									<label id="label">Description</label>
+									<div id="message">{{ meme_form.description|addclass:'form-control' }}</div>
+									<label id="label">Meme</label>
+									<div id="message">{{ meme_form.image }}</div>
+									<div class="form-group sellcenter">
+										<input style="margin-left:200px" type="submit" name="submit" class="button" value="List">
+									</div>
+								</div>
+							</div>	
+						</form>	
+					</div>	
+				</div>	
+			</div>	
 		</div>
 	</div>
-</form>
 {% endblock %}
+
+
+
+	
