@@ -26,8 +26,8 @@ class Meme(models.Model):
 class UserProfile(models.Model):
     # this links UserProfile to a User model instance
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    #purchased_memes = models.ManyToManyField(Meme, blank=True)
     purchased_memes = models.ManyToManyField(Meme, blank=True)
-
     # no args function can be called like {{ user.listed_memes }} in template
     def listed_memes(self):
         return self.user.meme_set.all()

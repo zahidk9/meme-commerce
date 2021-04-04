@@ -72,8 +72,14 @@ class SetUpTests(TestCase):
 
 class ModelTests(TestCase):
 
+    def test_purchased_memes(self):
+        user_profile = UserProfile.object.all()
+        meme1 = Meme.objects.create(title="Meme1")
+        meme2 = Meme.objects.create(title="Meme2")
+        user_profile.purchased_memes.set([meme1.pk, meme2.pk])
+        self.assertEqual(user.purchased_memes.count(), 2)
     #check if UserProfile model has been created correctly
-
+    
     def test_userprofile_class(self):
 
         #does it exist in memecommerce.models? Are all required attributes present?
@@ -83,7 +89,7 @@ class ModelTests(TestCase):
         user_profile = memecommerce.models.UserProfile()
 
         expected_attributes = {
-            'purchased_memes': create_meme_object(),
+            
             'user': create_user_object(),
         }
 
@@ -180,23 +186,13 @@ class LoginTests(TestCase):
         template_path = os.path.join(template_base_path, 'login.html')
         self.assertTrue(os.path.exists(template_path), f"{FAILURE_HEADER}We couldn't find the 'login.html' template in the 'templates/memecommerce/' directory.{FAILURE_FOOTER}")
 
-        #template_str = get_template(template_path)
-        #full_title_pattern = r'<title>(\s*|\n*)MemeCommerce(\s*|\n*)-(\s*|\n*)Login(\s*|\n*)</title>'
-        #block_title_pattern =         r'{% block title_block %}(\s*|\n*)Login(\s*|\n*){% (endblock|endblock title_block) %}'
-
         request = self.client.get(reverse('memecommerce:login'))
         content = request.content.decode('utf-8')
-        
-        #self.assertTrue(re.search(full_title_pattern, content), f"{FAILURE_HEADER}The <title> of the response for 'memecommerce:login' is not correct. Check your login.html template, and try again.{FAILURE_FOOTER}")
-        #self.assertTrue(re.search(block_title_pattern, template_str), f"{FAILURE_HEADER}Is login.html using template inheritance? Is your <title> block correct?{FAILURE_FOOTER}")
+
 
 class HomeViewTests(TestCase):
     #examine behaviour of the home view and its corresponding templates
-    #def setup(self):
-    #    populate()
-    #    self.response = self.client.get(reverse('memecommerce:home'))
-    #    self.content = self.response.content.decode()
-
+    
     def setUp(self):
         populate()
         self.response = self.client.get(reverse('memecommerce:home'))
