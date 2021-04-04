@@ -1,3 +1,5 @@
+from uuid import UUID
+
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views.generic import View, TemplateView 
@@ -46,11 +48,13 @@ def viewMeme(request, meme_id):
 
     try:
         meme = Meme.objects.get(meme_id=meme_id)
-        context_dict[meme] = meme
+        context_dict['meme'] = meme
 
     except Meme.DoesNotExist:
-        context_dict[meme] = None
+        context_dict['meme'] = None
         return redirect(reverse('memecommerce:404'))
+
+    print("context_dict:" + str(context_dict))
 
     return render(request, 'memecommerce/viewMeme.html', context=context_dict)
 
