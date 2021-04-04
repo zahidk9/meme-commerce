@@ -10,31 +10,31 @@ def populate():
             'title': 'super mario',
             'price': 64.00,
             'description': 'There is nothing wrong with him.',
-            'image': 'media/memes/ballsack_mario.png'
+            'image': 'media/memes/mario.png'
         },
         {
             'title': 'baby bottle',
             'price': 4.20,
             'description': 'will relax the baby',
-            'image': 'media/memes/bong.png'
+            'image': 'media/memes/bottle.png'
         },
         {
             'title': 'cat jug',
             'price': 129.88,
             'description': 'your cat jug sir',
-            'image': 'media/memes/cat jug.png'
+            'image': 'media/memes/cat_jug.jpg'
         },
         {
             'title': 'monke on bus',
             'price': 3900,
             'description': 'monke will surpass us',
-            'image': 'media/memes/cat.png'
+            'image': 'media/memes/cat.jpg'
         },
         {
             'title': 'doge',
             'price': 0.01,
             'description': 'such classic',
-            'image': 'media/memes/doge.png'
+            'image': 'media/memes/doge.jpg'
         },
         {
             'title': 'fish',
