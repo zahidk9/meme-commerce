@@ -20,6 +20,10 @@ FAILURE_FOOTER = f"{os.linesep}"
 
 f"{FAILURE_HEADER} {FAILURE_FOOTER}"
 
+def create_user_profile_object():
+    user_profile = UserProfile.user(create_user_object())
+    user_profile.purchased_memes.get_or_create(purchased_meme='')
+    return user_profile
 def create_user_object():
 
     #helper function to create a user object
@@ -71,14 +75,6 @@ class SetUpTests(TestCase):
         self.assertTrue('django.contrib.auth' in settings.INSTALLED_APPS)
 
 class ModelTests(TestCase):
-
-    def test_purchased_memes(self):
-        user_profile = UserProfile.object.all()
-        meme1 = Meme.objects.create(title="Meme1")
-        meme2 = Meme.objects.create(title="Meme2")
-        user_profile.purchased_memes.set([meme1.pk, meme2.pk])
-        self.assertEqual(user.purchased_memes.count(), 2)
-    #check if UserProfile model has been created correctly
     
     def test_userprofile_class(self):
 
@@ -189,7 +185,6 @@ class LoginTests(TestCase):
         request = self.client.get(reverse('memecommerce:login'))
         content = request.content.decode('utf-8')
 
-
 class HomeViewTests(TestCase):
     #examine behaviour of the home view and its corresponding templates
     
@@ -212,3 +207,65 @@ class AboutViewTests(TestCase):
 
     def test_template_filename(self):
         self.assertTemplateUsed(self.response, 'memecommerce/about.html', f"{FAILURE_HEADER}Are you using about.html for your about() view?{FAILURE_FOOTER}")  
+
+class MissingViewTests(TestCase):
+    def setUp(self):
+        self.response = self.client.get(reverse('memecommerce:404'))
+        self.content = self.response.content.decode()
+
+    def test_mapping_exists(self):
+        self.assertEquals(reverse('memecommerce:404'), '/memecommerce/404/', f"{FAILURE_HEADER}URL mapping either missing or mistyped.{FAILURE_FOOTER}")
+
+    def test_template_filename(self):
+        self.assertTemplateUsed(self.response, 'memecommerce/404.html', f"{FAILURE_HEADER}Are you using about.html for your missing() view?{FAILURE_FOOTER}")
+
+class RegistrationTests(TestCase):
+    #test registration of a user
+    def test_registration_view_exists(self):
+        url = ''
+        try:
+            url = reverse('memecommerce:register')
+        except:
+            pass
+
+        self.assertEqual(url, '/memecommerce/register/', f"{FAILURE_HEADER}Have you created the URL mapping for register correctly?{FAILURE_FOOTER}")
+
+    def test_registration_template(self):
+        template_base_path = os.path.join(settings.TEMPLATE_DIR, 'memecommerce')
+        template_path = os.path.join(template_base_path, 'register.html')
+        self.assertTrue(os.path.exists(template_path), f"{FAILURE_HEADER}couldn't find register.html template in directory.{FAILURE_FOOTER}")
+        
+class SellMemeTest(TestCase):
+    def test_sell_meme(self):
+        populate()
+        meme_object = create_meme_object()
+        self.client.login(username='testuser', password='test123456')
+
+class BaseTemplateTest(TestCase):
+    def get_template(self, path_to_template):
+        """
+        Helper function to return the string representation of a template file.
+        """
+        f = open(path_to_template, 'r')
+        template_str = ""
+
+        for line in f:
+            template_str = f"{template_str}{line}"
+
+        f.close()
+        return template_str    
+    
+    def test_for_links_in_base(self):
+        template_str = self.get_template(os.path.join(settings.TEMPLATE_DIR, 'memecommerce', 'base.html'))
+
+        look_for = [
+            '<a class="navbar-brand" href= "{% url \'memecommerce:home\' %}">Meme-Commerce</a>',
+            '<a class="nav-link" href="{% url \'memecommerce:sellMeme\' %}">Sell</a>',
+            '<a class="nav-link" href="{% url \'memecommerce:about\' %}">About</a>',
+            '<a class="nav-link" href="{% url \'memecommerce:home\' %}">Home</a>',
+            '<a class="dropdown-item" href="{% url \'memecommerce:logout\' %}">Log Out</a>',
+            '<a class="dropdown-item" href="{% url \'memecommerce:account\' %}">My Account</a>',
+        ]
+
+        for lookup in look_for:
+            self.assertTrue(lookup in template_str, f"{FAILURE_HEADER}in base.html, we could not find the hyperlink '{lookup}'{FAILURE_FOOTER}")
