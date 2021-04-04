@@ -1,1 +1,26 @@
 {% extends 'memecommerce/base.html' %}
+{% load static %}
+
+
+{% block title_block %} 
+    My Account
+{% endblock %} 
+
+{% block body_block %} 
+    <h2 class="accounttitle">My Account</h2>
+    <div class="container">
+        <div class="row">
+            {% for user_info in myaccount %}
+                <div class="caption">
+                    <h5>Your Account Information</h5>
+                    <p>{{ user_info.username }}</p>
+                    <p>{{ user_info.password }}</p>
+                    <p>{{ user_info.email }}</p>
+                    <p>{{ user_info.purchased_memes }}</p>
+
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

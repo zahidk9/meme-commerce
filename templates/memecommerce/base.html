@@ -36,7 +36,7 @@
 							  Hi {{ user.username }}!
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-							  <a class="dropdown-item" href="#">My Account</a>
+							  <a class="dropdown-item" href="{% url 'memecommerce:account' %}">My Account</a>
 							  <div class="dropdown-divider"></div>
 							  <a class="dropdown-item" href="{% url 'memecommerce:logout' %}">Log Out</a>
 							</div>
