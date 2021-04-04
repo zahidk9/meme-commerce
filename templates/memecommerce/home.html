@@ -19,63 +19,18 @@
 </div> -->
 <div class="container">
   <div class="row">
-    <div class="col-sm-4">
-		<div class="thumbnail">
-		  <img src="{% static "images/img1.png" %}" alt="My image"/>
-		  <div class="caption">
-                <h4>Thumbnail label</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, soluta, eligendi doloribus sunt minus amet sit debitis repellat. Consectetur, culpa itaque odio similique suscipit</p>
-          </div>
-		</div>
-    </div>
-    <div class="col-sm-4">
-		<div class="thumbnail">
-		  <img src="{% static "images/img2.png" %}" alt="My image"/>
-		  <div class="caption">
-                <h4>Thumbnail label</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, soluta, eligendi doloribus sunt minus amet sit debitis repellat. Consectetur, culpa itaque odio similique suscipit</p>
-          </div>
-		</div>  
-    </div>
-    <div class="col-sm-4">
-		<div class="thumbnail">
-		  <img src="{% static "images/img6.png" %}" alt="My image"/>
-		  <div class="caption">
-                <h4>Thumbnail label</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, soluta, eligendi doloribus sunt minus amet sit debitis repellat. Consectetur, culpa itaque odio similique suscipit</p>
-          </div>
+	{% for meme in meme_list %}
+		<div class="col-sm-4">	
+			<div class="thumbnail">
+				<img src="{{ meme.image.name }}" alt="{{ meme.title }}">
+				<div class="caption">					
+					<h5>{{ meme.title }}</h5>
+					<p>£{{ meme.price }}</p>
+				</div>	
+			</div>	
 		</div> 
-    </div>
-	<div class="col-sm-4">
-		<div class="thumbnail">
-		  <img src="{% static "images/img4.png" %}" alt="My image"/>
-		  <div class="caption">
-                <h4>Thumbnail label</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, soluta, eligendi doloribus sunt minus amet sit debitis repellat. Consectetur, culpa itaque odio similique suscipit</p>
-          </div>
-		</div> 
-    </div>
-	<div class="col-sm-4">
-		<div class="thumbnail">
-		  <img src="{% static "images/img5.png" %}" alt="My image"/>
-		  <div class="caption">
-                <h4>Thumbnail label</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, soluta, eligendi doloribus sunt minus amet sit debitis repellat. Consectetur, culpa itaque odio similique suscipit</p>
-          </div>
-		</div> 
-    </div>
-	<div class="col-sm-4">
-		<div class="thumbnail">
-		  <img src="{% static "images/img6.png" %}" alt="My image"/>
-		  <div class="caption">
-                <h4>Thumbnail label</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, soluta, eligendi doloribus sunt minus amet sit debitis repellat. Consectetur, culpa itaque odio similique suscipit</p>
-          </div>
-		</div>  
-    </div>
-	
+	{% endfor %}	
   </div>
 </div>
 
 {% endblock %}
-

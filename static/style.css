@@ -36,7 +36,7 @@ img {
 
 .thumbnail{
 	background-color: #E6E6E6 !important;
-	border: none;
+	border-radius: 8px !important;
 }
 
 .aboutbox{
