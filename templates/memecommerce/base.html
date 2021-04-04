@@ -14,6 +14,7 @@
 	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	  <link rel="preconnect" href="https://fonts.gstatic.com">
 	  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap" rel="stylesheet">
+	  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
 	  <!-- <script src={% static 'main.js' %} defer></script> -->
 	  
 	  <title>
@@ -25,7 +26,11 @@
 		<nav class="navbar navbar-default">
 			<div class="container-fluid">
 				<div class="navbar-header">
-					<a class="navbar-brand" href= "{% url 'memecommerce:home' %}">Meme-Commerce</a>
+					<!--<i class="fab fa-mix"></i>-->
+					<!--<i class="fab fa-medium"></i>-->
+					<!--<i class="fab fa-maxcdn"></i>-->
+					<!--<i class="fab fa-monero"></i>-->
+					<a class="navbar-brand" style="font-style:italic" href= "{% url 'memecommerce:home' %}"><i style="font-size:22px" class="fab fa-maxcdn"></i>eme-Commerce</a>
 				</div>
 				<ul class="nav navbar-nav navbar-right">
 					<li class="nav-item"><a class="nav-link" href="{% url 'memecommerce:home' %}">Home</a></li>
@@ -34,13 +39,13 @@
                         <li class="nav-item"><a class="nav-link" href="{% url 'memecommerce:sellMeme' %}">Sell</a></li>
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							  Hi {{ user.username }}!
+							  Hi {{ user.username }}! <i class="fas fa-sort-down"></i>
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown" style="padding-left:5px">
 							  <a class="dropdown-item" href="{% url 'memecommerce:account' %}">My Account</a>
 							  <div class="dropdown-divider"></div>
 							  </hr >
-							  <a class="dropdown-item" href="{% url 'memecommerce:logout' %}">Log Out</a>
+							  <a class="dropdown-item" href="{% url 'memecommerce:logout' %}">Log Out</a> <i class="fas fa-sign-out-alt"></i>
 							</div>
 						 </li>
                     {% else %}
