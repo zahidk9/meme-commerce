@@ -1,5 +1,6 @@
 from uuid import UUID
 
+import time
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views.generic import View, TemplateView 
@@ -24,8 +25,7 @@ from django.contrib.auth.decorators import login_required
         #return JsonResponse({'data': posts, 'max': max_size}, safe=False)
 
 def home(request):
-    all_memes = Meme.objects.all()
-    meme_list = list(filter(lambda meme: meme.purchased == False, all_memes))[:12]
+    meme_list = list(filter(lambda meme: meme.purchased == False, Meme.objects.order_by('-created')))[:12]
 
     context_dict = {}
     context_dict['meme_list'] = meme_list
@@ -85,6 +85,7 @@ def sellMeme(request):
         if meme_form.is_valid():
             meme = meme_form.save()
             meme.author = request.user
+            meme.created = int(time.time())
             meme.save()
             return redirect(reverse('memecommerce:home'))
         else:

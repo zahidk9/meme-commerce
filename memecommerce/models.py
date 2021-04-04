@@ -16,6 +16,7 @@ class Meme(models.Model):
     image = models.ImageField(upload_to="memes/")
     description = models.TextField(max_length=2048, null=True, blank=True)
     purchased = models.BooleanField(default=False)
+    created = models.IntegerField(null=True)
 
     def __str__(self):
         return self.title
