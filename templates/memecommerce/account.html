@@ -7,45 +7,32 @@
 {% endblock %} 
 
 {% block body_block %} 
-    <div class="container">
-        <div class="row">
-                <div class="caption">
-                    <h5>Your Account Information</h5>
-                    <p>{{ user.username }}</p>
-                    <!--<p>{{ myaccount.password }}</p>-->
-                    <p>{{ user.email }}</p>
-                    <!--<p>{{ myaccount.purchased_memes }}</p>-->
-                </div>
-        </div>
-    </div>
-
-{% endblock %}
-
-
-
-<div id="myaccount">
+    <div id="myaccount">
         <div class="container">
             <div id="login-row" class="row justify-content-center align-items-center">
                 <div id="login-column" class="col-md-6">
                     <div id="login-box" class="col-md-12">
                             <h3 class="text-center text-info">My Account</h3>
-							<div class = "loginboxes">
-								<div class="form-group">
-									<label id="label">Username</label>
-									<input type="text" name="username" id="username" class="form-control">
-								</div>
-								<div class="form-group">
-									<label id="label">Password</label>
-									<input type="password" name="password" id="password" class="form-control">
-								</div>
-								<div class="form-group center">
-									<input type="submit" name="submit" class="button" value="Log In">
-									New? <a href="{% url 'memecommerce:register' %}" class="text-info">Register here</a>
-								</div>
-							</div>	
+							<div class = "accboxes">
+								<p>Username: {{ user.username }}</p>
+								<p>Email: {{ user.email }}</p>
+								<!--<p>{{ myaccount.purchased_memes }}</p>-->
+							</div>
+							<br>
+							<div style="text-align:center">
+							<input type="submit" name="submit" class="button" value="Edit Email">
+							<input type="submit" name="submit" class="button" value="Purchased Memes">
+							<input type="submit" name="submit" class="button" value="Listed Memes">
+							</div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+	</div>
+
+{% endblock %}
+
+
+
+	
