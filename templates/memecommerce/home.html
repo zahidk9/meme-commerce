@@ -18,15 +18,16 @@
   <button class="btn btn-primary" id="load-btn">Load more</button>
 </div> -->
 <div class="container">
-  <div class="row">
+  <div class="row display-flex">
 	{% for meme in meme_list %}
-		<div class="col-sm-4">	
+		<div class="col-sm-3">	
 			<div class="thumbnail">
-				<img src="/{{ meme.image.name }}" alt="{{ meme.title }}">
+				<a href="{% url 'memecommerce:about' %}">
+					<img src="/{{ meme.image.name }}" alt="{{ meme.title }}">
+				</a>	
 				<div class="caption">					
-					<h5>{{ meme.title }}</h5>
-					<p>£{{ meme.price }}</p>					
-					<p>{{ meme.image.url }}</p>
+					<h3>{{ meme.title }}</h3>
+					<p>£{{ meme.price }}</p>	
 				</div>	
 			</div>	
 		</div> 

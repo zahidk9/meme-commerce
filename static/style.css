@@ -34,11 +34,34 @@ img {
 	text-transform: uppercase;
 }
 
+.row.display-flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .thumbnail{
 	background-color: #E6E6E6 !important;
 	border-radius: 8px !important;
+	height: 100%;
 }
 
+.thumbnail img{
+	max-height:300px;
+	width:100%;
+	max-width:300px
+}
+
+.caption{
+	text-align:center;
+}
+
+/**
+.thumbnail p, .thumbnail h5 {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+**/
 .aboutbox{
   background-color: #E6E6E6 !important;
   width: 550px;
