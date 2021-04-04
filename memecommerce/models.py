@@ -15,6 +15,7 @@ class Meme(models.Model):
     price = models.DecimalField(max_digits=6, decimal_places=2, default=0)
     image = models.ImageField(upload_to="memes/")
     description = models.TextField(max_length=2048, null=True, blank=True)
+    purchased = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title
@@ -26,7 +27,6 @@ class Meme(models.Model):
 class UserProfile(models.Model):
     # this links UserProfile to a User model instance
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    #purchased_memes = models.ManyToManyField(Meme, blank=True)
     purchased_memes = models.ManyToManyField(Meme, blank=True)
     # no args function can be called like {{ user.listed_memes }} in template
     def listed_memes(self):
