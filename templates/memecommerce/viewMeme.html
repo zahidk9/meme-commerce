@@ -11,7 +11,7 @@
 {% block body_block %}
     <div class="imgbox">
     {% csrf_token %}
-    <img  class="center-fit" src="/{{ meme.image.name }}" alt="{{ meme.title }}">
+    <img  class="center-fit" src="{{ meme.image.url }}" alt="{{ meme.title }}">
     <h4 class="center-fit">{{ meme.title }} £{{ meme.price }}</h4>
     <h5 class="center-fit">{{ meme.description }}</h5>
 {% endblock %}
