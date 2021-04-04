@@ -135,11 +135,11 @@ def populate():
     ]
 
     for meme in memes:
-        add_meme(title=meme['title'], price=meme['price'], description=meme['description'], image=meme['image'])
+        add_meme(title=meme['title'], price=meme['price'], description=meme['description'], image=meme['image'], purchased=meme['purchased'])
     for m in Meme.objects.all():
         print(f'- {m}')
 
-def add_meme(title, price, image, description):
+def add_meme(title, price, image, description, purchased):
     # uuid gets created automatically
     # author temporarily not required
     m = Meme()
@@ -147,6 +147,7 @@ def add_meme(title, price, image, description):
     m.price = price
     m.image = image
     m.description = description
+    m.purchased = purchased
     m.save()
     return m
 
