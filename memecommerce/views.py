@@ -91,7 +91,11 @@ def sellMeme(request):
 # account-related views
 @login_required
 def account(request):
+    myaccount = UserProfile.objects.all()
+    
     context_dict = {}
+    context_dict['myaccount'] = myaccount
+    
     response = render(request, 'memecommerce/account.html', context=context_dict)
     return response
 @login_required
