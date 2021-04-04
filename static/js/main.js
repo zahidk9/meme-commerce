@@ -1,4 +1,4 @@
-let visible = 6
+let visible = 8
 const postsBox = document.getElementById('posts_box')
 const spinnerBox = document.getElementById('spinner-box')
 const loadBtn = document.getElementById('load-btn')
