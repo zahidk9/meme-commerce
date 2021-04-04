@@ -13,6 +13,7 @@
 				<div id="login-column" class="col-md-6">
 					<div id="login-box" class="col-md-12">
 						<form id="meme_form" method="post" action="{% url 'memecommerce:sellMeme' %}" enctype="multipart/form-data">
+							{% csrf_token %}							
 							<h3 class="text-center text-info">List your Meme</h3>
 							<div class = "loginboxes">
 								<div class="fieldWrapper">
