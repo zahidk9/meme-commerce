@@ -28,6 +28,7 @@
 					<a class="navbar-brand" href= "{% url 'memecommerce:home' %}">Meme-Commerce</a>
 				</div>
 				<ul class="nav navbar-nav navbar-right">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'memecommerce:sellMeme' %}">Sell</a></li>
 					<li class="nav-item"><a class="nav-link" href="{% url 'memecommerce:home' %}">Home</a></li>
 					<li class="nav-item"><a class="nav-link" href="{% url 'memecommerce:about' %}">About</a></li>
 					{% if user.is_authenticated %}
