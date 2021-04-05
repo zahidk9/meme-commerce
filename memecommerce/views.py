@@ -158,9 +158,15 @@ def myListings(request):
 
 @login_required
 def myMemes(request):
-    context_dict = {}
-    response = render(request, 'memecommerce/myMemes.html', context=context_dict)
-    return response
+    user = request.user 
+    purchased_memes = UserProfile.purchased_memes 
+    context_dict['user'], context_dict['purchased_memes'] = user, purchased_memes
+
+    if request.method == "POST":
+        purchases_form = UserProfileForm(request.POST, instance=request.user)
+        return render(request, 'memecommerce/myMemes.html', context_dict)
+
+    return render(request, 'memecommerce/myMemes.html', context_dict)
 
 # authentication-related views
 def user_login(request):
