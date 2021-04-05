@@ -159,8 +159,8 @@ def myListings(request):
 @login_required
 def myMemes(request):
     user = request.user 
-    purchased_memes = UserProfile.purchased_memes 
-    context_dict['user'], context_dict['purchased_memes'] = user, purchased_memes
+    users_purchased_memes = list(UserProfile.purchased_memes) 
+    context_dict['user'], context_dict['user_purchased_memes'] = user, purchased_memes
 
     if request.method == "POST":
         purchases_form = UserProfileForm(request.POST, instance=request.user)
