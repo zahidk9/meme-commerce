@@ -1,1 +1,19 @@
 {% extends 'memecommerce/base.html' %}
+{% load static %} 
+
+{% block title_block %} 
+    My Listings
+{% endblock %} 
+
+{% block body_block %} 
+    <form method="POST">
+        {% csrf_token %} 
+        <h3 class="container">My Listings</h3>
+        <p>{{ user.listed_memes }}</p>
+        <br>
+        <div style="text-align: center">
+        <a class ="button" href="{% url 'memecommerce:account' %}" class="text-info">Back</a>
+        </div>
+    </form>
+
+{% endblock %} 

@@ -109,6 +109,8 @@ def account(request):
     
     response = render(request, 'memecommerce/account.html', context=context_dict)
     return response
+
+
 @login_required
 def editAccount(request):
     if request.method == 'POST':
@@ -121,6 +123,7 @@ def editAccount(request):
         form = EditAccountForm(instance=request.user)
         args = {'form': form}
         return render(request, 'memecommerce/editAccount.html', args)
+
 
 @login_required
 def deleteAccount(request):
@@ -141,9 +144,12 @@ def deleteAccount(request):
 
 @login_required
 def myListings(request):
-    context_dict = {}
-    response = render(request, 'memecommerce/myListings.html', context=context_dict)
-    return response
+    if request.method == "POST":
+        listings_form = UserProfileForm(request.POST, instance=request.user)
+        user = request.user 
+        args = {'user': user}
+        return render(request, 'memecommerce/myListings.html', args)
+
 @login_required
 def myMemes(request):
     context_dict = {}
