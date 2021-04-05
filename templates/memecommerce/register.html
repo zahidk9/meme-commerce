@@ -24,6 +24,15 @@
 									<label id="label">Password</label>
 									<div id="message">{{ user_form.password|addclass:'form-control' }}</div>
 								</div>
+								{% if user_form.errors %}
+									{% for field in user_form %}
+										{% for error in field.errors %}
+											<div class="alert alert-danger">
+												<strong>{{ error|escape }}</strong>
+											</div>
+										{% endfor %}
+									{% endfor %}
+								{% endif %}
 								{{ profile_form.as_p }}
 								<div class="form-group regcenter">
 									<input type="submit" name="submit" class="button" value="Register">

@@ -9,12 +9,12 @@
 
 
 {% block body_block %}
-	<div class="container border rounded-lg">
+	<div class="container">
 		{% csrf_token %}
 		<h2 class="center-fit">{{ meme.title }} £{{ meme.price }}</h2>		
 		<img  class="center-fit pull-left viewimg" src="{{ meme.image.url }}" alt="{{ meme.title }}">
 		<br >
-		<div class="imagetext border">
+		<div class="imagetext">
 			<h2 class="center-fit">{{ meme.description }}</h2>
 			<input style="float:right" type="submit" name="submit" class="button" value="Buy Now">
 		</div>
