@@ -9,14 +9,30 @@
 
 
 {% block body_block %}
-	<div class="container">
-		{% csrf_token %}
-		<h2 class="center-fit">{{ meme.title }} £{{ meme.price }}</h2>		
-		<img  class="center-fit pull-left viewimg" src="{{ meme.image.url }}" alt="{{ meme.title }}">
-		<br >
-		<div class="imagetext">
-			<h2 class="center-fit">{{ meme.description }}</h2>
-			<input style="float:right" type="submit" name="submit" class="button" value="Buy Now">
-		</div>
-	</div>	
+	<div id="viewmeme">
+        <div class="container">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6">
+                    <div id="login-box" class="col-md-12">
+							<div class = "loginboxes">
+								<div class="thumbnail loginboxes">
+									<h2>{{ meme.title }} - £{{ meme.price }}</h2>
+									<img style= "max-width:100%;height:auto"src="{{ meme.image.url }}" alt="{{ meme.title }}">
+									<div class="caption">					
+										<h4>Desc: {{ meme.description }}</h4>
+										<h4>By: {{ meme.author }}</h4>
+										<br >
+										<a href="{% url 'memecommerce:buyMeme' meme_id=meme.meme_id %}" class="button">Buy Now</a>
+									</div>	
+								</div>
+							</div>	
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
+
+
+	

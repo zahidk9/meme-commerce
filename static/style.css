@@ -54,7 +54,7 @@ img {
 .thumbnail img{
 	max-height:300px;
 	width:100%;
-	max-width:300px
+	max-width:300px;
 }
 
 .caption{
@@ -275,7 +275,7 @@ img {
 }
 
 .imgtext{
-	border: 1px solid black;
+	float:right;
 }
 
 #edit .container #login-row #login-column #login-box {
@@ -300,7 +300,34 @@ img {
   margin-top: -85px;
 }
 
+/**#viewmeme{
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  margin: -100px 0 0 -100px;
+}
 
+#viewmeme .container{
+	padding: 30px;
+}**/
+
+#viewmeme .container #login-row #login-column #login-box {
+  margin-left: 350px;
+  max-width: 600px;
+  height: 320px;
+  width: 50%;
+  height: 10%;
+  min-width: 400px;
+  min-height:250px;
+  
+}
+#viewmeme .container #login-row #login-column #login-box #login-form {
+  padding: 20px;
+}
+
+#viewmeme .container #login-row #login-column #login-box #login-form #register-link {
+  margin-top: -85px;
+}
 
 
 
