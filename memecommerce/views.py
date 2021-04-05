@@ -1,15 +1,16 @@
 from uuid import UUID
 
 import time
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.forms import UserChangeForm
 from django.views.generic import View, TemplateView 
 from memecommerce.models import Meme, UserProfile
 from django.http import HttpResponse, JsonResponse
-from memecommerce.forms import UserForm, UserProfileForm, MemeForm, EditAccountForm
+from memecommerce.forms import UserForm, UserProfileForm, MemeForm, EditAccountForm, UserDeleteForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 # Create your views here.
 
@@ -120,6 +121,24 @@ def editAccount(request):
         form = EditAccountForm(instance=request.user)
         args = {'form': form}
         return render(request, 'memecommerce/editAccount.html', args)
+
+@login_required
+def deleteAccount(request):
+    if request.method == "POST":
+        delete_form = UserDeleteForm(request.POST, instance=request.user)
+        user = request.user 
+        user.delete()
+        messages.info(request, 'Your account has been deleted')
+        return redirect(reverse('memecommerce:home'))
+    else:
+        delete_form = UserDeleteForm(instance=request.user)
+    
+    context = {
+        'delete_form': delete_form
+    }
+
+    return render(request, "memecommerce/deleteAccount.html", context)
+
 @login_required
 def myListings(request):
     context_dict = {}
