@@ -28,7 +28,7 @@ from django.contrib import messages
         #return JsonResponse({'data': posts, 'max': max_size}, safe=False)
 
 def home(request):
-    meme_list = list(filter(lambda meme: meme.purchased == False, Meme.objects.order_by('-created')))[0:]
+    meme_list = list(filter(lambda meme: meme.purchased == False, Meme.objects.order_by('-created')))
 
     context_dict = {}
     context_dict['meme_list'] = meme_list
@@ -144,11 +144,17 @@ def deleteAccount(request):
 
 @login_required
 def myListings(request):
+    context_dict = {}
+    user = request.user
+    listed_memes = list(filter(lambda meme: meme.author == user, Meme.objects.all()))
+    context_dict['user'], context_dict['listed_memes'] = user, listed_memes
+
     if request.method == "POST":
         listings_form = UserProfileForm(request.POST, instance=request.user)
-        user = request.user 
-        args = {'user': user}
-        return render(request, 'memecommerce/myListings.html', args)
+        return render(request, 'memecommerce/myListings.html', context_dict)
+
+    return render(request, 'memecommerce/myListings.html', context_dict)
+
 
 @login_required
 def myMemes(request):
