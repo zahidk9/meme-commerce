@@ -1,0 +1,23 @@
+{% extends 'memecommerce/base.html' %}
+{% load static %} 
+
+{% block title_block %}
+    Delete Account
+{% endblock %}
+
+{% block body_block %}
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border -bottom mb-4">Delete User Account</legend>
+            <p>Are you sure you want to delete your account?</p>
+            {{ form }}
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-danger" type="submit">Delete Account</button>
+                <a class="btn btn-primary-custom" style="float:right;"
+                    href="{% url 'memecommerce:home' %}">Cancel</a>
+        </div>
+    </form>
+
+{% endblock %}
