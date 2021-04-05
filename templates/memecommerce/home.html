@@ -20,7 +20,7 @@
 <div class="container">
   <div class="row display-flex">
 	{% for meme in meme_list %}
-		<div class="col-sm-3">	
+		<div class="col-sm-3 col-xs-12">	
 			<div class="thumbnail">
 				<a href="{% url 'memecommerce:viewMeme' meme_id=meme.meme_id %}">
 					<img src="{{ meme.image.url }}" alt="{{ meme.title }}">
