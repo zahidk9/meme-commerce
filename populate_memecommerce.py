@@ -1,8 +1,10 @@
 import os
+import pathlib
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'memecommerce_project.settings')
 
 import django
+from shutil import copyfile
 django.setup()
 from django.contrib.auth.models import User
 from memecommerce.models import Meme
@@ -72,13 +74,6 @@ def populate():
             'purchased': False,
         },
         {
-            'title': 'goomba',
-            'price': 12.80,
-            'description': 'are you',
-            'image': 'memes/goomba.png',
-            'purchased': False,
-        },
-        {
             'title': 'seal',
             'price': 5000,
             'description': 'relaxing and enjoying himself',
@@ -135,6 +130,10 @@ def populate():
 
     for meme in memes:
         add_meme(title=meme['title'], price=meme['price'], description=meme['description'], image=meme['image'], purchased=meme['purchased'], author=author)
+        src = pathlib.Path(meme['image'])
+        str(pathlib.Path().absolute())
+        dst = pathlib.Path(str(pathlib.Path().absolute()) + '/media/' + meme['image'])
+        copyfile(src, dst) # to put the files where they're actually meant to be
     for m in Meme.objects.all():
         print(f'- {m}')
 
@@ -149,6 +148,7 @@ def add_meme(title, price, image, description, purchased, author):
     m.purchased = purchased
     m.author = author
     m.save()
+
     return m
 
 if __name__ == '__main__':
