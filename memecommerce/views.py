@@ -66,16 +66,16 @@ def buyMeme(request, meme_id):
     context_dict = {}
     try:
         meme = Meme.objects.get(meme_id=meme_id)
-        context_dict[meme] = meme
+        context_dict['meme'] = meme
 
         if request.method == 'POST':
             user = request.user
             userprofile = UserProfile.objects.get(user=user)
             userprofile.purchased_memes.add()
-            redirect(reverse('memecommerce:home'))
+            redirect(reverse('memecommerce:account'))
 
     except Meme.DoesNotExist:
-        context_dict[meme] = None
+        context_dict['meme'] = None
         return redirect(reverse('memecommerce:404'))
 
     return render(request, 'memecommerce/buyMeme.html', context=context_dict)
