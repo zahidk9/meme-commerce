@@ -1,5 +1,7 @@
 {% extends 'memecommerce/base.html' %}
 {% load static %} 
+{% load myfilter %}
+
 
 {% block title_block %}
     Edit Account
@@ -10,9 +12,35 @@
     <div class="container">
         <form method="post">
             {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Update Account Details</button>
+            <div id="edit" class="justify-content-center">
+				<div class="container">
+					<div id="login-row" class="row justify-content-center align-items-center">
+						<div id="login-column" class="col-md-6">
+							<div id="login-box" class="col-md-12">
+								<form method="post">
+								{% csrf_token %}
+									<h3 class="text-center text-info">Edit Your Details</h3>
+									<div class = "loginboxes">
+										<div class="fieldWrapper">
+											<label id="label">Email</label>
+											<div id="email">{{ form.email|addclass:'form-control' }}</div>
+										</div>
+										<div class="form-group center">
+											<input type="submit" name="submit" class="button" value="Update">
+										</div>
+									</div>	
+								</form>	
+							</div>	
+						</div>	
+					</div>	
+				</div>
+			</div>
         </form>
-        <br>
     </div>
 {% endblock %} 
+
+
+		
+	
+	
+	

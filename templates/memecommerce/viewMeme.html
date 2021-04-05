@@ -9,9 +9,14 @@
 
 
 {% block body_block %}
-    <div class="imgbox">
-    {% csrf_token %}
-    <img  class="center-fit" src="{{ meme.image.url }}" alt="{{ meme.title }}">
-    <h4 class="center-fit">{{ meme.title }} £{{ meme.price }}</h4>
-    <h5 class="center-fit">{{ meme.description }}</h5>
+	<div class="container border rounded-lg">
+		{% csrf_token %}
+		<h2 class="center-fit">{{ meme.title }} £{{ meme.price }}</h2>		
+		<img  class="center-fit pull-left viewimg" src="{{ meme.image.url }}" alt="{{ meme.title }}">
+		<br >
+		<div class="imagetext border">
+			<h2 class="center-fit">{{ meme.description }}</h2>
+			<input style="float:right" type="submit" name="submit" class="button" value="Buy Now">
+		</div>
+	</div>	
 {% endblock %}

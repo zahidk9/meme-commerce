@@ -115,7 +115,7 @@ def editAccount(request):
 
         if forms.is_valid():
             forms.save()
-            return redirect(reverse('memecommerce:home'))
+            return redirect(reverse('memecommerce:account'))
     else:
         form = EditAccountForm(instance=request.user)
         args = {'form': form}

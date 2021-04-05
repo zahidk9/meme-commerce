@@ -13,6 +13,12 @@ img {
 	background-color: white !important;	
 }
 
+.navbar-custom{
+	background-color:#4d4dff;
+	
+}
+	
+
 .nav-link{	
 	color: #000066 !important;
 	padding: 1em 1.5em;
@@ -104,12 +110,13 @@ img {
 	border-radius: 30px;
 	padding: 10px;
 	text-align:center;
-	min-width: 100px;	
+	min-width: 100px;		
 }
 
 .button:hover{
 	color: black;
 	background-color: #99d6ff;
+	text-decoration: none;
 }
 
 .loginboxes{
@@ -262,6 +269,37 @@ img {
 #about .container #login-row #login-column #login-box #login-form #register-link {
   margin-top: -85px;
 }
+
+.viewimg{
+  margin-right: 200px;	
+}
+
+.imgtext{
+	border: 1px solid black;
+}
+
+#edit .container #login-row #login-column #login-box {
+  margin-top: 120px;
+  margin-left: 350px;
+  max-width: 600px;
+  height: 320px;
+  border: 1px solid #9C9C9C;
+  background-color: white;
+  border-radius: 10px;
+  width: 50%;
+  height: 50%;
+  min-width: 400px;
+  min-height:250px;
+  
+}
+#edit .container #login-row #login-column #login-box #login-form {
+  padding: 20px;
+}
+
+#edit .container #login-row #login-column #login-box #login-form #register-link {
+  margin-top: -85px;
+}
+
 
 
 
