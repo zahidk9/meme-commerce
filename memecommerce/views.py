@@ -2,13 +2,15 @@ from uuid import UUID
 
 import time
 from django.shortcuts import render, redirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
+from django.contrib.auth.forms import UserChangeForm
 from django.views.generic import View, TemplateView 
 from memecommerce.models import Meme, UserProfile
 from django.http import HttpResponse, JsonResponse
-from memecommerce.forms import UserForm, UserProfileForm, MemeForm
+from memecommerce.forms import UserForm, UserProfileForm, MemeForm, EditAccountForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+
 # Create your views here.
 
 #class MainView(TemplateView):
@@ -108,9 +110,16 @@ def account(request):
     return response
 @login_required
 def editAccount(request):
-    context_dict = {}
-    response = render(request, 'memecommerce/editAccount.html', context=context_dict)
-    return response
+    if request.method == 'POST':
+        forms = EditAccountForm(request.POST, instance=request.user)
+
+        if forms.is_valid():
+            forms.save()
+            return redirect(reverse('memecommerce:home'))
+    else:
+        form = EditAccountForm(instance=request.user)
+        args = {'form': form}
+        return render(request, 'memecommerce/editAccount.html', args)
 @login_required
 def myListings(request):
     context_dict = {}

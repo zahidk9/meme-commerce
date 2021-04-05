@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User 
 from memecommerce.models import Meme, UserProfile
+from django.contrib.auth.forms import UserChangeForm
 
 class MemeForm(forms.ModelForm):
     title = forms.CharField(max_length=32)
@@ -27,3 +28,9 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ('purchased_memes',)
+
+class EditAccountForm(UserChangeForm):
+    template_name = 'memecommerce/editAccount.html'
+    class Meta:
+        model = User 
+        fields = ('email',)

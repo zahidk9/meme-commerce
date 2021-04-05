@@ -1,1 +1,18 @@
 {% extends 'memecommerce/base.html' %}
+{% load static %} 
+
+{% block title_block %}
+    Edit Account
+{% endblock %} 
+
+
+{% block body_block %}
+    <div class="container">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Update Account Details</button>
+        </form>
+        <br>
+    </div>
+{% endblock %} 
