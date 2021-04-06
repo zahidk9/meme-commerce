@@ -73,7 +73,7 @@ def buyMeme(request, meme_id):
 
         if request.method == 'POST':
             userprofile = UserProfile.objects.get(user=user)
-            userprofile.purchased_memes.add(Meme.objects.all())
+            userprofile.purchased_memes.add(meme)
             purchases_form = UserProfileForm(request.POST, instance=request.user)
             return render(request, 'memecommerce/myMemes.html', context_dict)
 
