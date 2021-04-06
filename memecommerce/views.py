@@ -65,7 +65,7 @@ def viewMeme(request, meme_id):
 def buyMeme(request, meme_id):
     context_dict = {}
     try:
-        #meme = Meme.objects.get(meme_id=meme_id)
+        meme = Meme.objects.get(meme_id=meme_id)
         user = request.user
         user_profile = UserProfile.objects.get(user=user)
         purchased_memes = user_profile.purchased_memes.all()
