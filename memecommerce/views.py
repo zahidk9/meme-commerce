@@ -82,7 +82,6 @@ def buyMeme(request, meme_id):
         return redirect(reverse('memecommerce:404'))
 
     return render(request, 'memecommerce/myMemes.html', context_dict)
-    
 
 @login_required
 def sellMeme(request):
