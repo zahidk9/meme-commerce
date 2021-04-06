@@ -65,20 +65,23 @@ def viewMeme(request, meme_id):
 def buyMeme(request, meme_id):
     context_dict = {}
     try:
-        meme = Meme.objects.get(meme_id=meme_id)
-        context_dict['meme'] = meme
+        #meme = Meme.objects.get(meme_id=meme_id)
+        user = request.user
+        user_profile = UserProfile.objects.get(user=user)
+        purchased_memes = user_profile.purchased_memes.all()
+        context_dict['user'], context_dict['user_purchased_memes'] = user, purchased_memes
 
         if request.method == 'POST':
-            user = request.user
             userprofile = UserProfile.objects.get(user=user)
-            userprofile.purchased_memes.add()
-            redirect(reverse('memecommerce:account'))
+            userprofile.purchased_memes.add(Meme.objects.all())
+            purchases_form = UserProfileForm(request.POST, instance=request.user)
+            return render(request, 'memecommerce/myMemes.html', context_dict)
 
     except Meme.DoesNotExist:
         context_dict['meme'] = None
         return redirect(reverse('memecommerce:404'))
 
-    return render(request, 'memecommerce/buyMeme.html', context=context_dict)
+    return render(request, 'memecommerce/myMemes.html', context_dict)
 
 @login_required
 def sellMeme(request):

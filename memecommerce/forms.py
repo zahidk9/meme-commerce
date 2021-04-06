@@ -23,7 +23,7 @@ class UserForm(forms.ModelForm):
         fields = ('username', 'email', 'password')
 
 class UserProfileForm(forms.ModelForm):
-    purchased_memes = forms.CharField(widget=forms.HiddenInput(), required=False)
+    #purchased_memes = forms.CharField(widget=forms.HiddenInput(), required=False)
 
     class Meta:
         model = UserProfile
@@ -39,4 +39,6 @@ class UserDeleteForm(forms.ModelForm):
     class Meta:
         model = User 
         fields = []
+
+
 
