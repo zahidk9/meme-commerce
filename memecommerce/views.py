@@ -158,8 +158,9 @@ def myListings(request):
 
 @login_required
 def myMemes(request):
+    context_dict = {}
     user = request.user 
-    users_purchased_memes = list(UserProfile.purchased_memes) 
+    purchased_memes = list(UserProfile.purchased_memes)
     context_dict['user'], context_dict['user_purchased_memes'] = user, purchased_memes
 
     if request.method == "POST":
