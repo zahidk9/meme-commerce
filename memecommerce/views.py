@@ -71,11 +71,12 @@ def buyMeme(request, meme_id):
         purchased_memes = user_profile.purchased_memes.all()
         context_dict['user'], context_dict['user_purchased_memes'] = user, purchased_memes
 
-        if request.method == 'POST':
-            userprofile = UserProfile.objects.get(user=user)
-            userprofile.purchased_memes.add(meme)
-            purchases_form = UserProfileForm(request.POST, instance=request.user)
-            return render(request, 'memecommerce/myMemes.html', context_dict)
+        userprofile = UserProfile.objects.get(user=user)
+        print(userprofile.purchased_memes.all())
+        userprofile.purchased_memes.add(meme)
+        print(userprofile.purchased_memes.all())
+        purchases_form = UserProfileForm(request.POST, instance=request.user)
+        return render(request, 'memecommerce/myMemes.html', context_dict)
 
     except Meme.DoesNotExist:
         context_dict['meme'] = None
